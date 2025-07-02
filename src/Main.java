@@ -11,7 +11,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-// TODO: parametry, formularze i POST, logi, wielowątkowość, posprzątać
+// TODO: parametry, formularze i POST, wielowątkowość, posprzątać
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -25,7 +25,7 @@ public class Main {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
                     OutputStream output = client.getOutputStream();
 
-                    // Zbieranie żądania
+                    // Zbieranie pierwszej linii żądania
 
                     String requestLine = reader.readLine();
 
@@ -34,6 +34,12 @@ public class Main {
                     if (requestLine == null || requestLine.isEmpty()) continue;
 
                     System.out.println("Źądanie: " + requestLine);
+
+                    // logowanie pierwszej linii żądania
+
+                    Logger.log("Żądanie: " + requestLine + " od " + client.getInetAddress());
+
+                    // parsowanie pierwszej linii żądania
 
                     String[] parts = requestLine.split(" ");
                     if (parts.length < 2) {
