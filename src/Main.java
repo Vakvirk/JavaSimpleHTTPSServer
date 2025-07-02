@@ -11,7 +11,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-// TODO: parametry, formularze i POST, logi, wielowątkowość, posprzątać
+// TODO: parametry, formularze i POST, wielowątkowość, posprzątać
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -34,6 +34,10 @@ public class Main {
                     if (requestLine == null || requestLine.isEmpty()) continue;
 
                     System.out.println("Źądanie: " + requestLine);
+
+                    // logowanie żądania
+
+                    Logger.log("Żądanie: " + requestLine + " od " + client.getInetAddress());
 
                     String[] parts = requestLine.split(" ");
                     if (parts.length < 2) {
